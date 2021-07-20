@@ -36,7 +36,7 @@
      &  output,physcon,ctrl,typeboun,fmpc,tieset,ntie,tietol,nslavs,
      &  t0g,t1g,nprop,ielprop,prop,mortar,nintpoint,ifacecount,
      &  islavsurf,pslavsurf,clearini,irstrt,vel,nef,velo,veloo,
-     &  ne2boun)
+     &  ne2boun,accrestart)
 !
       implicit none
 !
@@ -74,7 +74,7 @@
      &  xnor(*),thicke(*),offset(*),t0g(*),t1g(*),clearini(*),
      &  shcon(*),cocon(*),sti(*),ener(*),xstate(*),prestr(*),ttime,
      &  qaold(2),physcon(*),ctrl(*),cs(*),fmpc(*),xbody(*),
-     &  xbodyold(*),prop(*),vel(*),velo(*),veloo(*)
+     &  xbodyold(*),prop(*),vel(*),velo(*),veloo(*),accrestart(*)
 !
       ipos=index(jobnamec(1),char(0))
       fnrstrt(1:ipos-1)=jobnamec(1)(1:ipos-1)
@@ -370,6 +370,7 @@
       read(15)(vold(i),i=1,mt*nk)
       if((nmethod.eq.4).or.((nmethod.eq.1).and.(iperturb(1).ge.2))) then
          read(15)(veold(i),i=1,mt*nk)
+         read(15)(accrestart(i),i=1,mt*nk)
       endif
 !
 !     CFD results at the element centers

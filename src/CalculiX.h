@@ -686,7 +686,8 @@ void FORTRAN(calinput,(double *co,ITG *nk,ITG *kon,ITG *ipkon,char *lakon,
                ITG *ikmpcref,ITG *memmpcref_,ITG *mpcfreeref,
                ITG *maxlenmpcref,ITG *memmpc_,ITG *isens,ITG *namtot,
                ITG *stam,double *dacon,double *vel,ITG *nef,
-               double *velo,double *veloo,ITG *ne2boun,ITG *itempuser));    
+               double *velo,double *veloo,ITG *ne2boun,ITG *itempuser,
+               ITG irestart, double *accrestart));    
 
 void cascade(ITG *ipompc,double **coefmpcp,ITG **nodempcp,ITG *nmpc,
    ITG *mpcfree,ITG *nodeboun,ITG *ndirboun,ITG*nboun,ITG*ikmpc,
@@ -3533,7 +3534,8 @@ void nonlingeo(double **co,ITG *nk,ITG **konp,ITG **ipkonp,char **lakonp,
              ITG **islavsurfp,double **pslavsurfp,double **clearinip,
              ITG *nmat,double *xmodal,ITG *iaxial,ITG *inext,ITG *nprop,
              ITG *network,char *orname,double *vel,ITG *nef,
-             double *velo,double *veloo,double *energy,ITG *itempuser);
+             double *velo,double *veloo,double *energy,ITG *itempuser,
+             ITG irestart, double *accrestart);
 
 void FORTRAN(nonlinmpc,(double *co,double *vold,ITG *ipompc,ITG *nodempc,
                    double *coefmpc,char *labmpc,ITG *nmpc,ITG *ikboun,
@@ -4117,7 +4119,7 @@ void FORTRAN(restartwrite,(ITG *istep,ITG *nset,ITG*nload,ITG *nforc,
   double *t0g,double *t1g,ITG *nprop,ITG *ielprop,double *prop,ITG *mortar,
   ITG *nintpoint,ITG *ifacecount,ITG *islavsurf,double *pslavsurf,
   double *clearini,ITG *irstrt,double *vel,ITG *nef,double *velo,
-  double *veloo,ITG *ne2boun));
+  double *veloo,ITG *ne2boun,double *accold));
 
 void FORTRAN(resultnet,(ITG *itg,ITG *ieg,ITG *ntg,
                         double *bc,ITG *nload,char *sideload,

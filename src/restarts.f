@@ -36,7 +36,7 @@
      &  ttime,qaold,cs,mcs,output,physcon,ctrl,typeboun,iline,ipol,inl,
      &  ipoinp,inp,fmpc,tieset,ntie,tietol,ipoinpc,nslavs,t0g,t1g,nprop,
      &  ielprop,prop,mortar,nintpoint,ifacecount,islavsurf,pslavsurf,
-     &  clearini,ier,vel,nef,velo,veloo,ne2boun)
+     &  clearini,ier,vel,nef,velo,veloo,ne2boun,irestart,accrestart)
 !
       implicit none
 !
@@ -66,7 +66,7 @@
      &  nener,irestartstep,irestartread,irstrt(*),istat,n,i,key,
      &  iprestr,mcs,maxlenmpc,iline,ipol,inl,
      &  ipoinp(2,*),inp(3,*),ntie,ibody(*),nbody,nslavs,nef,
-     &  ne2boun(2,*)
+     &  ne2boun(2,*),irestart
 !
       real*8 co(*),xboun(*),coefmpc(*),xforc(*),xload(*),elcon(*),
      &  rhcon(*),alcon(*),alzero(*),plicon(*),plkcon(*),orab(*),
@@ -75,7 +75,8 @@
      &  xnor(*),thicke(*),offset(*),t0g(*),t1g(*),clearini(*),
      &  shcon(*),cocon(*),sti(*),ener(*),xstate(*),prop(*),
      &  ttime,qaold(2),cs(17,*),physcon(*),pslavsurf(*),
-     &  ctrl(*),fmpc(*),xbody(*),xbodyold(*),vel(*),velo(*),veloo(*)
+     &  ctrl(*),fmpc(*),xbody(*),xbodyold(*),vel(*),velo(*),veloo(*),
+     &  accrestart(*)
 !
       irestartread=0
       irestartstep=0
@@ -83,6 +84,7 @@
       do i=2,n
          if(textpart(i)(1:4).eq.'READ') then
             irestartread=1
+            irestart=1 !Add a restart index to be used in nonlingeo if simulation is restarted
          elseif(textpart(i)(1:5).eq.'STEP=') then
             read(textpart(i)(6:15),'(i10)',iostat=istat) irestartstep
             if(istat.gt.0) then
@@ -132,7 +134,7 @@
      &  output,physcon,ctrl,typeboun,fmpc,tieset,ntie,tietol,nslavs,
      &  t0g,t1g,nprop,ielprop,prop,mortar,nintpoint,ifacecount,
      &  islavsurf,pslavsurf,clearini,irstrt,vel,nef,velo,veloo,
-     &  ne2boun)
+     &  ne2boun,accrestart)
       endif
 !
       call getnewline(inpc,textpart,istat,n,key,iline,ipol,inl,

@@ -44,7 +44,7 @@
      &  pslavsurf,clearini,heading,iaxial,nobject,objectset,nprint_,
      &  iuel,nuel_,nodempcref,coefmpcref,ikmpcref,memmpcref_,
      &  mpcfreeref,maxlenmpcref,memmpc_,isens,namtot,nstam,dacon,
-     &  vel,nef,velo,veloo,ne2boun,itempuser)
+     &  vel,nef,velo,veloo,ne2boun,itempuser,irestart,accrestart)
 !
       implicit none
 !
@@ -113,7 +113,7 @@
      &  ichangesurfacebehavior,nobject,ibasemotion,iuel(4,*),nuel_,
      &  nodempcref(3,*),ikmpcref(*),memmpcref_,mpcfreeref,
      &  maxlenmpcref,memmpc_,isens,iamplitudedefault,namtot,
-     &  nstam,ier,nef,ne2boun(2,*),itempuser(*)
+     &  nstam,ier,nef,ne2boun(2,*),itempuser(*),irestart
 !
       real*8 co(3,*),xboun(*),coefmpc(*),xforc(*),fmpc(*),
      &  xload(2,*),alzero(*),offset(2,*),prop(*),pslavsurf(3,*),
@@ -128,7 +128,8 @@
      &  xstate(nstate_,mi(1),*),ttime,qaold(2),cs(17,*),tietol(2,*),
      &  xbody(7,*),xbodyold(7,*),t0g(2,*),t1g(2,*),
      &  fei(3),tinc,tper,xmodal(*),tmin,tmax,tincf,
-     &  alpha(*),physcon(*),coefmpcref(*),vel(nef,*),velo(*),veloo(*)
+     &  alpha(*),physcon(*),coefmpcref(*),vel(nef,*),velo(*),veloo(*),
+     &  accrestart(0:mi(2),*)
 !
       save solid,ianisoplas,out3d,pretension
 !
@@ -924,7 +925,7 @@ c
      &           ipoinp,inp,fmpc,tieset,ntie,tietol,ipoinpc,nslavs,
      &           t0g,t1g,nprop,ielprop,prop,mortar,nintpoint,ifacecount,
      &           islavsurf,pslavsurf,clearini,ier,vel,nef,velo,veloo,
-     &           ne2boun)
+     &           ne2boun,irestart,accrestart)
 !
             elseif(textpart(1)(1:18).eq.'*RETAINEDNODALDOFS') then
                call retainednodaldofss(inpc,textpart,set,istartset,

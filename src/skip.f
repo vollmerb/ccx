@@ -213,6 +213,7 @@
       if((nmethod.eq.4).or.((nmethod.eq.1).and.(iperturb(1).ge.2))) 
      &     then
          read(15)(r8,i=1,mt*nk)
+         read(15)(r8,i=1,mt*nk) !for accrestart
       endif
 !
 !     CFD results at the element centers
